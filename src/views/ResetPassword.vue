@@ -11,7 +11,7 @@
       </div>
 
       <hr>
-      <button class="btn btn-danger fw-bolder mt-1 d-block w-100 py-2 ">
+      <button class="btn btn-danger fw-bolder mt-1 d-block w-100 py-2 " @click="resetPassword">
         <i class="bi bi-arrow-clockwise me-1">
         </i>
         Reset
@@ -28,7 +28,7 @@
 </template>
 <script>
   import ErrorAlert from "../components/ErrorAlert";
-
+  import firebase from 'firebase'
   export default {
     name: "ResetPassword",
     components: {ErrorAlert},
@@ -44,6 +44,20 @@
     methods:{
       hideError(){
         this.isError = false
+      },
+      resetPassword(){
+        firebase
+        .auth()
+        .sendPasswordResetEmail(this.email)
+        .then( ()=>{
+          alert('Check your email for further instructions')
+          this.email =''
+           } )
+        .catch(err => {
+          this.isError = true
+          this.msgError = err.message
+        })
+
       }
     }
   }

@@ -18,13 +18,24 @@
 
     <div class="input-group mb-3">
       <span class="input-group-text">
-      <i class="bi bi-lock-fill"></i>
+      <i class="bi bi-lock "></i>
       </span>
       <input type="password" class="form-control" placeholder="Password" v-model="password">
     </div>
+    <div class="input-group mb-3">
+      <span class="input-group-text">
+      <i class="bi bi-lock-fill"></i>
+      </span>
+      <input type="password" class="form-control" placeholder="Confirm" v-model="confirm">
+    </div>
+
+
+
 <hr>
   <button class="btn btn-success fw-bolder mt-1 d-block w-100 py-2 "
-                              @click="registerUser"        >
+                              @click="registerUser"
+                              :disabled="password != confirm || password <= 6"
+  >
     <i class="bi bi-person-plus-fill me-1">
     </i>
   Sign Up
@@ -52,6 +63,7 @@ export default {
       username: '',
       email: '',
       password: '',
+      confirm:'',
       isError: false,
       msgError: 'Erorrrrr'
     }
@@ -71,7 +83,7 @@ export default {
           displayName:this.username
         })
         .then(() => {
-          this.$router.push('/login')
+          this.$router.push('/account')
                 }
 
         )
