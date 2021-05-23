@@ -56,6 +56,7 @@
                             .auth()
                             .onAuthStateChanged(() => {
                                 this.$router.push('/login')
+                                console.log('out')
                             })
 
                     })

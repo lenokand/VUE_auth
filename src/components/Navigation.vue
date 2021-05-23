@@ -7,11 +7,26 @@
     </router-link>
     <div class="nav navbar-nav flex-row">
 
-    <router-link to="/" class="nav-link">
+    <router-link to="/" class="nav-link"
+                 v-if="!user"
+    >
         Register
     </router-link>
-        <router-link to="/login" class="nav-link">
+        <router-link to="/login" class="nav-link"
+            v-if="!user"
+        >
             Login
+        </router-link>
+
+        <router-link to="/account" class="nav-link"
+                     v-if="user"
+        >
+            Account
+        </router-link>
+        <router-link to="/chat" class="nav-link"
+                     v-if="user"
+        >
+            Chat
         </router-link>
     </div>
 
@@ -22,8 +37,26 @@
     
 
 <script>
+import firebase from "firebase";
+
 export default {
-    name:"Navigation"
+    name:"Navigation",
+    data(){
+        return {
+            user: null
+        }
+    },
+    created() {
+        firebase
+            .auth()
+            .onAuthStateChanged((user) => {
+                if (user) {
+                    this.user = user
+                     } else {
+                    this.user = null
+                }
+            })
+    }
 }
 </script>
 

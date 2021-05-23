@@ -21,6 +21,13 @@ const routes = [
 
   },
   {
+    path: '/Chat',
+    name: 'Chat',
+
+    component: () => import( '../views/Chat.vue')
+
+  },
+  {
     path: '/reset-password',
     name: 'reset-password',
 

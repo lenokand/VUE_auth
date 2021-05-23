@@ -9,6 +9,7 @@ import firebase from "firebase";
 const firebaseConfig = {
     apiKey: "AIzaSyAvFI15dg8MmhmifqCIxwUwIC27U4mU2PY",
     authDomain: "appvue-55329.firebaseapp.com",
+    databaseURL: "https://appvue-55329-default-rtdb.europe-west1.firebasedatabase.app",
     projectId: "appvue-55329",
     storageBucket: "appvue-55329.appspot.com",
     messagingSenderId: "732472955850",
