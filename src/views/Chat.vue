@@ -3,12 +3,12 @@
 
         <h5 class="fw-bolder text-black-50 mb-3" v-if="user">
             {{user ? user.displayName : 'Guest'}} </h5>
-
-            <div class="massages border rounded p-3 d-flex flex-column overflow-auto flex-grow-1">
+    <div id="messagesContainer" class="overflow-auto flex-grow-1">
+        <div class="massages border rounded p-3 d-flex flex-column ">
             <div v-for="message in messages" :key="message.id" class="d-flex flex-column w-100">
 
                 <div class="massage rounded text-white p-3 shadow-sm position-relative mb-2"
-                :class="{'bg-primary align-self-end': message.uid == user.uid,
+                     :class="{'bg-primary align-self-end': message.uid == user.uid,
                 'bg-secondary': message.uid != user.uid  }"
                 >
                     <h6 class="fw-bold fst-italic"> {{message.username}}</h6>
@@ -19,26 +19,26 @@
                     <i class="small text-white-50 position-absolute  massage-time">
                         {{new Date(message.timestamp).toLocaleTimeString('ru-RU') }}
 
-<!--                        .{{new Date().getMonth(message.timestamp)}}-->
-<!--                        .{{new Date().getDate(message.timestamp)}}-->
-<!--                        {{new Date().getHours(message.timestamp) }}:{{new Date().getMinutes(message.timestamp) }}-->
+                        <!--                        .{{new Date().getMonth(message.timestamp)}}-->
+                        <!--                        .{{new Date().getDate(message.timestamp)}}-->
+                        <!--                        {{new Date().getHours(message.timestamp) }}:{{new Date().getMinutes(message.timestamp) }}-->
 
-                        </i>
+                    </i>
                 </div>
 
 
             </div>
 
 
-<!--            <div class="massage bg-primary rounded align-self-end text-white p-3 shadow-sm position-relative my-2">-->
-<!--                <h6 class="fw-bold fst-italic"> Username</h6>-->
+            <!--            <div class="massage bg-primary rounded align-self-end text-white p-3 shadow-sm position-relative my-2">-->
+            <!--                <h6 class="fw-bold fst-italic"> Username</h6>-->
 
-<!--                <p class="mb-1 mt-2">-->
-<!--                    454 mgggg assages border rounded p-3 d-flex flex-column overflow-auto flex-grow-1-->
+            <!--                <p class="mb-1 mt-2">-->
+            <!--                    454 mgggg assages border rounded p-3 d-flex flex-column overflow-auto flex-grow-1-->
 
-<!--                </p>-->
-<!--                <i class="small text-white-50 position-absolute  massage-time">time</i>-->
-<!--            </div>-->
+            <!--                </p>-->
+            <!--                <i class="small text-white-50 position-absolute  massage-time">time</i>-->
+            <!--            </div>-->
 
 
             <div>
@@ -48,20 +48,26 @@
 
 
         </div>
+    </div>
 
 
         <div class=" border-top mt-3">
-            <div class="input-group my-3">
 
 
+            <form @submit.prevent="sendMessage">
+                <div class="input-group my-3">
                 <input type="text" class="form-control"
                        v-model="newMessage"
                 >
                 <button type="submit" class="btn btn-outline-secondary"
-                        @click="sendMessage">
+                        >
                     <i class="bi bi-cursor-fill"></i>
                 </button>
-            </div>
+                </div>
+            </form>
+
+
+
         </div>
     </div>
 </template>
@@ -111,7 +117,14 @@
                     })
                 }))
                 this.messages = messagesTMP
+
+                setTimeout( () => {
+                    document.querySelector('#messagesContainer').scrollTo(0, 500)
+                }, 500)
+
             })
+
+
         },
         methods: {
             sendMessage() {
@@ -135,7 +148,7 @@
 
 <style scoped lang="scss">
     .chat {
-        height: calc(100vh - 96px);
+        height: calc(100vh - 104px);
 
     }
 
