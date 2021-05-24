@@ -57,7 +57,7 @@
                 <input type="text" class="form-control"
                        v-model="newMessage"
                 >
-                <button type="button" class="btn btn-outline-secondary"
+                <button type="submit" class="btn btn-outline-secondary"
                         @click="sendMessage">
                     <i class="bi bi-cursor-fill"></i>
                 </button>
